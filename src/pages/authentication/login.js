@@ -38,7 +38,12 @@ class Login extends Component {
             // this.props.setId(id);
       //      Toast.show('Sign in successful');
       this.props.setLog();
-      this.props.history.push(prevLocation || "/dashboard");
+      if(prevLocation !== '/'){
+        this.props.history.push(prevLocation || "/dashboard");
+      }else{
+        this.props.history.push("/dashboard");
+      }
+      
  //           this.props.navigation.navigate("Dashboard", {});
               })
               .catch(error => {
