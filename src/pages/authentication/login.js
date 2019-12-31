@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./styles/login.css";
 import Cookies from 'js-cookie'
-import { identifier } from "../../../../GreenLaundry/node_modules/@babel/types/lib";
 import { API_URL } from '../../root.js';
 import axios from "axios";
 
