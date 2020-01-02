@@ -3,16 +3,30 @@ import "./styles/admins.css";
 import Calendar from "react-calendar";
 import Chart from "chart.js";
 import { IconContext } from "react-icons";
-import { MdSettings } from "react-icons/md";
-import Modal from "react-bootstrap/Modal";
+import { MdSettings, MdDeleteForever } from "react-icons/md";
 import Button from "react-bootstrap/Button";
-import { API_URL } from '../../../root.js'
+import { API_URL } from "../../../root.js";
 import axios from "axios";
 var moment = require("moment");
 class Admins extends Component {
   constructor(props) {
     super(props);
-    this.state = { showHideSidenav: "hidden", show: false, admins: [] };
+    this.state = {
+      showHideSidenav: "hidden",
+      show: false,
+      admins: [],
+      toDelete: "",
+      showCreate: false,
+      number: "",
+      first_name: "",
+      last_name: "",
+      address: "",
+      zip: "",
+      email: "",
+      password: "",
+      error_div: false,
+      error: ""
+    };
   }
 
   toggleSidenav() {
@@ -20,12 +34,23 @@ class Admins extends Component {
     this.setState({ showHideSidenav: css });
   }
 
-  handleShow() {
-    this.setState({ show: true });
+  handleShow(id) {
+    this.setState({ show: true, toDelete: id });
   }
 
   handleClose() {
     this.setState({ show: false });
+  }
+
+  handleShowCreate() {
+    this.setState({ showCreate: true });
+  }
+
+  handleCloseCreate() {
+    this.setState({ showCreate: false });
+  }
+  handleNumber(e) {
+    this.setState({ number: e.target.value });
   }
 
   componentDidMount() {
@@ -50,72 +75,236 @@ class Admins extends Component {
           }));
         }
       })
+      .catch(error => {
+        this.props.history.push("/");
+        console.log(error);
+      });
+  }
+
+  delete() {
+    console.log(this.state.toDelete);
+    var config = {
+      headers: { Authorization: "Bearer " + this.props.token },
+      timeout: 20000
+    };
+    axios
+      .delete(API_URL + "users/" + this.state.toDelete, config)
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        this.props.history.push("/");
+        console.log(error);
+      });
+  }
+  createAdmin(e) {
+    e.preventDefault();
+    if (isNaN(this.state.number)) {
+      this.setState({ error: "Invalid Mobile Number", error_div: true });
+    } else if (isNaN(this.state.zip)) {
+      this.setState({ error: "Invalid Zip code", error_div: true });
+    } else {
+      this.setState({ error_div: false });
+      var bodyParameters = {
+        email: this.state.email,
+        password: this.state.password,
+        address: this.state.address,
+        zipcode: this.state.zip,
+        mobile_number: this.state.number,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        role: "admin"
+      };
+      console.log(bodyParameters);
+      axios
+        .post(API_URL + "users", bodyParameters, {
+          timeout: 20000
+        })
+        .then(response => {
+          console.log(response);
+          window.location.reload();
+        })
         .catch(error => {
-          this.props.history.push("/");
-      console.log(error);
-    });
+          console.log(error);
+          if (error.response.data) {
+            this.setState({
+              error: error.response.data.message,
+              error_div: true
+            });
+            console.log(JSON.stringify(error));
+          }
+        });
+    }
   }
 
   render() {
-    let {showHideSidenav} = this.state
-    const admin_data = this.state.admins.map(function(item, index) {
+    let { showHideSidenav, showCreate } = this.state;
+    const admin_data = this.state.admins.map(
+      function(item, index) {
+        return (
+          <tr>
+            <td>{index + 1}</td>
+            <td>{item.first_name + " " + item.last_name}</td>
+            <td>{item.email}</td>
+            <td>{item.role}</td>
+            <td>
+              <a
+                href="#"
+                onClick={this.handleShow.bind(this, item._id)}
+                ref="btn"
+              >
+                <IconContext.Provider value={{ color: "#B1ADAD", size: 22 }}>
+                  <MdDeleteForever />
+                </IconContext.Provider>
+              </a>
+              <div className={showHideSidenav}>
+                <p className="block-text">Block</p>
+                <p className="suspend-text">Suspend</p>
+              </div>
+            </td>
+          </tr>
+        );
+      }.bind(this)
+    );
+
+    const ModalAdmin = ({ handleClose, show, children }) => {
+      const showHideClassName = show
+        ? "modal display-block"
+        : "modal display-none";
+
       return (
-        <tr>
-          <td>{index+1}</td>
-          <td>{item.first_name + " " + item.last_name}</td>
-          <td>{item.email}</td>
-          <td>{item.role}</td>
-          <td>
-            <a href="#" onClick={()=>this.toggleSidenav.bind(this)} ref="btn">
-              <IconContext.Provider value={{ color: "#B1ADAD", size: 22 }}>
-                <MdSettings />
-              </IconContext.Provider>
-            </a>
-            <div className={showHideSidenav}>
-              <p className="block-text">Block</p>
-              <p className="suspend-text">Suspend</p>
+        <div className={showHideClassName}>
+          <section className="modal-main">
+            {children}
+            <div className="button-row">
+              <button onClick={this.delete.bind(this)}>Yes</button>{" "}
+              <button onClick={handleClose}>Close</button>
             </div>
-          </td>
-        </tr>
+          </section>
+        </div>
       );
-    }.bind(this));
+    };
+    const showHideClassNameCreate = showCreate
+      ? "display-block"
+      : "display-none";
+
     return (
       <div className="main-box">
+        <ModalAdmin
+          show={this.state.show}
+          handleClose={this.handleClose.bind(this)}
+          delete={this.delete.bind(this)}
+        >
+          <p>Are you sure you want to delete this admin</p>
+        </ModalAdmin>
         <p className="admin-header">Admin</p>
-        <button className="admin-button">
+        <button
+          className="admin-button"
+          onClick={this.handleShowCreate.bind(this)}
+        >
           <p>ADD ADMIN</p>
         </button>
+        <div className={showHideClassNameCreate}>
+          <p className="admin-header">Add Admin</p>
+          {this.state.error_div && (
+            <div className="error">{this.state.error}</div>
+          )}
+          <form onSubmit={this.createAdmin.bind(this)}>
+            <div className="form-box">
+              <div className="input-row">
+                <p className="label-text">First Name</p>
+                <input
+                  type="text"
+                  value={this.state.first_name}
+                  required
+                  onChange={event =>
+                    this.setState({ first_name: event.target.value })
+                  }
+                />
+                <p className="label-text">Last Name</p>
+                <input
+                  type="text"
+                  value={this.state.last_name}
+                  required
+                  onChange={event =>
+                    this.setState({ last_name: event.target.value })
+                  }
+                />
+              </div>
+              <div className="input-row">
+                <p className="label-text">Email</p>
+                <input
+                  type="email"
+                  value={this.state.email}
+                  required
+                  onChange={event =>
+                    this.setState({ email: event.target.value })
+                  }
+                />
+                <p className="label-text">Password</p>
+                <input
+                  type="password"
+                  value={this.state.password}
+                  minLength={8}
+                  onChange={event =>
+                    this.setState({ password: event.target.value })
+                  }
+                />
+              </div>
+              <div className="input-row">
+                <p className="label-text">Mobile Number(+1)</p>
+                <input
+                  type="text"
+                  value={this.state.number}
+                  minLength={10}
+                  maxLength={10}
+                  onChange={event =>
+                    this.setState({ number: event.target.value })
+                  }
+                />
+                <p className="label-text">Zip code</p>
+                <input
+                  type="text"
+                  value={this.state.zip}
+                  minLength={5}
+                  maxLength={5}
+                  required
+                  onChange={event => this.setState({ zip: event.target.value })}
+                />
+              </div>
+            </div>
+            <p className="label-text">Address</p>
+            <input
+              type="text"
+              value={this.state.address}
+              required
+              onChange={event => this.setState({ address: event.target.value })}
+            />
+            <div className="input-row">
+              {/* <button onClick={this.createAdmin.bind(this)}>Create</button>{" "} */}
+              <input type="submit" value="Create" className="button" />
+              <div
+                className="button"
+                onClick={this.handleCloseCreate.bind(this)}
+              >
+                Close
+              </div>
+            </div>
+          </form>
+        </div>
         <table id="customers">
-        <tbody>
-          <tr>
-            <th>S/N</th>
-            <th>Admin name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Action</th>
-          </tr>
-          {admin_data}
+          <tbody>
+            <tr>
+              <th>S/N</th>
+              <th>Admin name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Action</th>
+            </tr>
+            {admin_data}
           </tbody>
         </table>
-
-        <Modal
-          show={this.state.show}
-          onHide={this.handleClose.bind(this)}
-          animation={true}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose.bind(this)}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.handleClose.bind(this)}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </div>
     );
   }

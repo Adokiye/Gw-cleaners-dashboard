@@ -11,6 +11,7 @@ import Users from './pages/dashboard/users/users.js';
 import Admins from './pages/dashboard/admins/admins.js'
 let token = Cookies.get('token') // => 'value'
 let id = Cookies.get('id') // => 'value'
+let role = Cookies.get('role')
 
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
     return (
@@ -21,8 +22,8 @@ const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
         render={(props) => {
           return loggedIn ? (
             <div className="App-body">
-            <Sidebar {...props}  />
-            <Comp {...props} token={token} id={id} />
+            <Sidebar {...props} role={role}  />
+            <Comp {...props} token={token} id={id} role={role}/>
             </div>
           ) : (
             <Redirect

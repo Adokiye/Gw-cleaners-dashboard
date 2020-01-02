@@ -32,8 +32,10 @@ class Login extends Component {
             console.log(response);
             let id = response.data.data._id;
             let token = response.data.token;
+            let role = response.data.role;
             Cookies.set('token', token, { expires: 14 });
             Cookies.set('id', id, { expires: 14 });   
+            Cookies.set('role', role, {expires: 14})
             // this.props.setToken(token);
             // this.props.setId(id);
       //      Toast.show('Sign in successful');
@@ -78,7 +80,7 @@ class Login extends Component {
          {this.state.error_div && <div className="error">{this.state.error}</div>}       
                 <div className="form-box">
                     <p className="label-text">Email</p>
-                    <input  type="text"
+                    <input  type="email"
                                    value={this.state.email}
            onChange={(event)=> this.setState({email: event.target.value})}
                     />
@@ -89,7 +91,7 @@ class Login extends Component {
                     />
                 </div>
                 <button className="button" onClick={this.log.bind(this)}><p>Sign in</p></button>
-                <a href=""><p className="forgot-text">Forgot Password</p></a>
+                {/* <a href=""><p className="forgot-text">Forgot Password</p></a> */}
             </div>
         );
     }

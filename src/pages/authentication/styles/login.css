@@ -78,6 +78,8 @@ input:focus {
     background-color   : #ffffff;
     color: black;
     outline: none;
+    border: 1px solid;
+    border-color: #DBDBDB;
   }
   input:focus:not(:focus-visible), textarea:focus:not(:focus-visible) { 
     outline : none; 

@@ -30,7 +30,14 @@
     font-family: 'Montserrat-SemiBold';
     src: local('Montserrat-SemiBold'), url('../../../../fonts/Montserrat-SemiBold.ttf') format('truetype');
 }
-
+.edit-modal{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: white;
+}
 .main-box {
       display: flex;
       flex-direction: column;
@@ -45,6 +52,112 @@
       font-size: 44px;
       margin-top: 2%;
       margin-bottom: 1%;
+  }
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .modal-main {
+    position:fixed;
+    background: white;
+    width: 40%;
+    height: auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .form-box{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.input-row{
+  display: flex;width: auto;flex-direction: row;align-self: center;
+  margin-top: 20px;justify-content: space-between;
+}
+.label-text{
+    color: #4F4F4F;
+    font-family: 'NunitoSans-Bold';
+    font-size: 12px;
+    margin-right: 10px;
+}
+.error{
+    background-color   : #DBDBDB;
+    width: 324px;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid;
+    border-color: red;
+}
+input{
+    background-color   : #DBDBDB;
+    width: 324px;
+    height: 41px;
+    border-radius: 4px;
+    margin-right: 10px;
+    border: 0px solid;
+}
+input:focus {
+    background-color   : #ffffff;
+    color: black;
+    outline: none;
+    border: 1px solid;
+    border-color: #DBDBDB;
+  }
+  input:focus:not(:focus-visible), textarea:focus:not(:focus-visible) { 
+    outline : none; 
+  }
+  .button {
+    background-color: #1bc47d; 
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 41px;
+    width: 324px;
+    border: 0px solid;
+    border-radius: 4px;
+    margin-top: 25px;
+    font-family: 'NunitoSans-Regular';
+    margin-right: 10px;
+  }
+
+  .button-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: auto;
+  }
+  .button-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .display-block {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .display-none {
+    display: none;
   }
   #customers {
     font-family:'NunitoSans-Regular';
