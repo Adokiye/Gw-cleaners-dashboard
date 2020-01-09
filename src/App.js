@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import { Switch, Route, Link, Redirect, BrowserRouter, withRouter } from "react-router-dom";
 import Sidebar from './components/sidebar/sidebar.js';
 import Home from './pages/dashboard/home/home.js'
+import FirstPage from './pages/index'
 import Orders from './pages/dashboard/orders/orders.js';
 import Users from './pages/dashboard/users/users.js';
 import Admins from './pages/dashboard/admins/admins.js'
@@ -65,8 +66,10 @@ class App extends Component {
             <div className="App-body">
             <BrowserRouter>
                       <Switch>
-            <Route path="/" exact 
+            <Route path="/login" 
             render={(props) => <Login {...props} setLog={this.setLog.bind(this)} />} />
+                        <Route path="/" exact 
+            render={(props) => <FirstPage {...props} />} />
             <ProtectedRoute exact path="/dashboard" loggedIn={token && true} component={Home} />
             <ProtectedRoute path="/orders" loggedIn={token && true} component={Orders} />
             <ProtectedRoute path="/users" loggedIn={token && true} component={Users} />
