@@ -257,9 +257,11 @@ a{
     .appleImage{
         width: 179px;
         height: 63px;
+        cursor: pointer;
     }
     .playstoreImage{
         margin-left: 12px;
+        cursor: pointer;
     }
     .back-white{
         position: absolute;
