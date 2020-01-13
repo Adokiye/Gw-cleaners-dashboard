@@ -99,7 +99,7 @@ class FirstPage extends Component {
         </div>
         <FadeInSection>
         <img src={require('../images/check.png')} width={40} height={40} />
-          <div>The Cheapest</div>
+          <div>The Cheapest </div>
           Prices
 </FadeInSection>
                 <FadeInSection>
