@@ -10,6 +10,7 @@ import FirstPage from './pages/index'
 import Orders from './pages/dashboard/orders/orders.js';
 import Users from './pages/dashboard/users/users.js';
 import Admins from './pages/dashboard/admins/admins.js'
+import Dropbox from './pages/dashboard/dropbox/dropbox'
 let token = Cookies.get('token') // => 'value'
 let id = Cookies.get('id') // => 'value'
 let role = Cookies.get('role')
@@ -74,6 +75,7 @@ class App extends Component {
             <ProtectedRoute path="/orders" loggedIn={token && true} component={Orders} />
             <ProtectedRoute path="/users" loggedIn={token && true} component={Users} />
             <ProtectedRoute path="/admins" loggedIn={token && true} component={Admins} />
+            <ProtectedRoute path="/dropbox" loggedIn={token && true} component={Dropbox} />
           </Switch></BrowserRouter>
 {/* <Sidebar />
 <Admins /> */}
