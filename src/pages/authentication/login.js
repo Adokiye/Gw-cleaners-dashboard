@@ -50,7 +50,7 @@ class Login extends Component {
           //      Toast.show('Sign in successful');
           this.props.setLog();
           if (prevLocation !== "/") {
-            this.props.history.push(prevLocation || "/dashboard");
+            this.props.history.push("/dashboard");
           } else {
             this.props.history.push("/dashboard");
           }
