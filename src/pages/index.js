@@ -48,7 +48,7 @@ class FirstPage extends Component {
       }, []);
       return (
         <div
-          className={`col-sm-3 sub-divs ${isVisible ? 'is-visible' : ''}`}
+          className={`col-xs-3 col-md-3 sub-divs ${isVisible ? 'is-visible' : ''}`}
           ref={domRef}
         >
           {props.children}
@@ -73,14 +73,15 @@ class FirstPage extends Component {
         className="map"
       />
       :       <Fragment>
-        <div className="col-sm-5">
+        <div className="col-xs-12 col-md-5">
           <p className="easy-text">Easy Laundry And Drycleaning Solutions</p>
           <div className="row">
             <img className="appleImage" src={require('../images/playstore.png')} />
             <img className="appleImage playstoreImage" src={require('../images/googlePlay.png')} />
           </div>
         </div>
-        <div className="col-sm-7 row justify-content-end">
+        <div class="w-100"></div>
+        <div className="col-xs-12 col-md-7 row justify-content-end">
         <img className="back-white" src={require('../images/whiteBack.png')} />
         <img className="phone" src={require('../images/phoneAsset.png')} />
         </div></Fragment>
@@ -91,10 +92,11 @@ class FirstPage extends Component {
       <Fragment>
       <div className="row justify-content-space-between white-div">
       <div className="w-100"></div>
-        <div className="col-sm-12 align-items-center justify-content-center under-div-text">
+        <div className="col xs-12 col-md-12 align-items-center justify-content-center under-div-text">
         Why You Should Use us
         </div>
-        <div className="col-sm-12 align-items-center justify-content-center offer-div-text">
+        <div class="w-100"></div>
+        <div className="col xs-12 col-md-12 align-items-center justify-content-center offer-div-text">
         We offer
         </div>
         <FadeInSection>
@@ -132,9 +134,9 @@ class FirstPage extends Component {
       </div>
       <div className="how-it-works-div">
        <img
-       className="col-sm-6 how-it-works-image"
+       className="col-md-6 how-it-works-image"
         src={require('../images/howWorks.png')} />
-        <div className="col-sm-5">
+        <div className="col-md-5">
         <div className="how-it-works">How it works</div>
         <div className="row" style={{marginTop: 41}}>
          <img
@@ -183,10 +185,10 @@ class FirstPage extends Component {
         </div>
       </div>
       <div className="row about-us-div">
-      <div ref={this.about} className="col-sm-12 about-us-text">
+      <div ref={this.about} className="col-md-12 about-us-text">
         About Us
       </div>
-      <div className="col-sm-12 about-us-content">
+      <div className="col-md-12 about-us-content">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rutrum mauris ornare aliquam ullamcorper dui hendrerit volutpat in
 . Faucibus ut lacus hendrerit ut urna, eu pellentesque nisl consequat. Mattis egestas integer mattis amet, etiam. Proin vel enim
  ultrices iaculis velit mattis magna. Amet quis nunc consequat pulvinar interdum dui at aliquet bibendum. Rhoncus, id posuere
@@ -202,21 +204,21 @@ class FirstPage extends Component {
       </div>
       <img src={require('../images/downCurve.png')} className="about-us-under-div" />
       <div className="row justify-content-space-between price-list-div">
-      <div className="col-sm-12 price-list-text">
+      <div className="col-md-12 price-list-text">
       PriceList
       </div>
       <div className="w-100" />
       <div className="row-between">
          <img src={require('../images/firstpricelist.png')}
-          className="col-sm-4"
+          className="col-md-4"
           height={518}
           />
                    <img src={require('../images/secondpricelist.png')}
-          className="col-sm-4"
+          className="col-md-4"
           height={518}
           />
                    <img src={require('../images/todo.png')}
-          className="col-sm-4"
+          className="col-md-4"
           style={{zIndex: -1}}
           height={518}
           />
@@ -226,14 +228,14 @@ class FirstPage extends Component {
       }
       
       <div className="footer-div">
-       <div className="col-sm-3 normal-text">
+       <div className="col-md-3 normal-text">
        Operational Office: No 10, BlaBla Close Lagos<br/>
 +234(0) 123 4567<br/> 
 Mon - Fri (9am - 5pm)<br/> 
 contact GW@Gmail.com
        </div>
-       <div className="col-sm-3">
-       <div className="col-sm-12 bold-text">
+       <div className="col-md-3">
+       <div className="col-md-12 bold-text">
          Legal
        </div>
        <div className="normal-text">
@@ -241,8 +243,8 @@ contact GW@Gmail.com
        Privacy Policy
        </div>
       </div>
-      <div className="col-sm-3">
-       <div className="col-sm-12 bold-text">
+      <div className="col-md-3">
+       <div className="col-md-12 bold-text">
          Useful Links
        </div>
        <div className="normal-text">
@@ -253,7 +255,7 @@ contact GW@Gmail.com
        Contact Us
        </div>
       </div>
-      <div className="col-sm-3 bold-text">
+      <div className="col-md-3 bold-text">
           Download Apps
       </div>
       </div>
