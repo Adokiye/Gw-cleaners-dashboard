@@ -56,38 +56,34 @@ a{
     cursor: pointer;
   }
   .header{
-      display: -webkit-box;
+      /* display: -webkit-box;
       display: -ms-flexbox;
-      display: flex;
+
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
           -ms-flex-direction: row;
-              flex-direction: row;
+              flex-direction: row; */
       background-color: white;
-      padding-left: 45px;
-      padding-right: 45px;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
+      padding-left: 5%;
+      /* padding-right: 45px; */
+      /* -webkit-box-align: center;
+          -ms-flex-align: center; */
               align-items: center;
-      -webkit-box-pack: justify;
-          -ms-flex-pack: justify;
+      /* -webkit-box-pack: justify;
+          -ms-flex-pack: justify; */
               justify-content: space-between;
       top: 0;
-      width: 100%;
-      height: 120px;
+      /* width: 100%;  */
+      min-width: 100%;
+     /* height: 120px; */
+      display: flex;
   }
   .left-div{
-      display:  -webkit-box;
-      display:  -ms-flexbox;
       display:  flex;
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: row;
               flex-direction: row;
       height: 100px;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
               align-items: center;
+              
   }
    .nav-text{
      font-family: 'NunitoSans-Regular';
@@ -128,7 +124,8 @@ a{
         -webkit-box-pack: justify;
             -ms-flex-pack: justify;
                 justify-content: space-between;
-        width: 100%;
+        /* width: 100%;  */
+        min-width: 100%;
         padding-left: 1.45%;
         height: 670px;
         
@@ -141,7 +138,7 @@ a{
     .under-div{
         display: block;
         height: 150px;
-        width: 100%;
+        width: 100%; min-width: 100%;
         background-size: 100% 100px;
         background-repeat: no-repeat;
         position: relative;
@@ -245,6 +242,7 @@ a{
         transition: opacity 0.6s ease-out, transform 1.2s ease-out;
         transition: opacity 0.6s ease-out, transform 1.2s ease-out, -webkit-transform 1.2s ease-out;
         will-change: opacity, visibility;
+        margin-top: 10px;
     }
       .sub-divs.is-visible {
         opacity: 1;
@@ -275,7 +273,7 @@ a{
         max-width: 400px;
         width: auto;
         margin-top: 80px;
-        position: relative;
+        position: absolute;
         z-index: 2;
         right: 1.45%;
     }
@@ -286,11 +284,13 @@ a{
         -webkit-box-pack: justify;
             -ms-flex-pack: justify;
                 justify-content: space-between;
-        width: 100%;
+        /* width: 100%; */
+         min-width: 100%;
     }
     .how-it-works-div{
         height: 488px;
-        width: 100%;
+        /* width: 100%;  */
+        min-width: 100%;
         padding-left: 3%;
         padding-right: 3%;
         -webkit-box-orient: horizontal;
@@ -339,9 +339,11 @@ a{
     body {
         margin: 0;
         padding: 0;
+        /* position: fixed; */
     }
     .about-us-under-div{
-        width: 100%;
+        /* width: 100%;  */
+        min-width: 100%;
         height: 42px;
         z-index: 1
     }
@@ -415,6 +417,7 @@ a{
     .footer-div{
           background-color: #1BC47D;
           /* width: 100%; */
+          min-width: 100%; 
           color: white;
           height: 226px;
           margin-top: 80px;
@@ -435,6 +438,7 @@ a{
           -webkit-box-pack: justify;
               -ms-flex-pack: justify;
                   justify-content: space-between;
+                  bottom: 0;
     }
     .normal-text{
         color: white;
@@ -448,24 +452,21 @@ a{
         margin-bottom: 22px;
     }
 
-  @media only screen and (max-width: 768px) {
-    /* .main-box {
-        display: flex;
-        flex-direction: column;
-        background-color: #ffffff;
-        flex: 1;
-    } */
+   @media only screen and (max-width: 768px) {
     .nav-text{
-        display:  -webkit-box;
-        display:  -ms-flexbox;
-        display:  none;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
-        height: 100px;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-    }
-  }
+        font-family: 'NunitoSans-Regular';
+        font-size: 16px;
+        color: #1bc47d;
+        /* margin-left: 65px; */
+        cursor: pointer;
+        border: 0px solid;
+        background-color: white;
+        display: none;
+      }
+      .price-list-div{
+          display: none;
+      }
+      .how-it-works-div{
+          display: none;
+      }
+  } 

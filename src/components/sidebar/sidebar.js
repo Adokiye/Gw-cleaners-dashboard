@@ -24,6 +24,13 @@ class SomeComponent extends Component {
   //     this.callAPI();
   // }
 
+press(value){
+  const {pathname} = this.props.location;
+if(value != pathname){
+  this.props.history.push(value);
+}
+}
+
   render() {
     const {pathname} = this.props.location;
     console.log(pathname+"   k")
@@ -31,7 +38,10 @@ class SomeComponent extends Component {
       <div className="main-box-sidebar">
         <img src={require("../../images/logo.png")} className="logo-image" />
         <div className="line-div" />
-        <Link to="/dashboard" className={pathname === '/dashboard' ? "route active-route" : "route inactive-route"}>
+        <button 
+        onClick={this.press.bind(this, '/dashboard')}
+      //  to="/dashboard" 
+        className={pathname === '/dashboard' ? "route active-route" : "route inactive-route"}>
         {/* <button className={pathname === '/dashboard' ? "route active-route" : "route inactive-route"}> */}
         {pathname === '/dashboard' ? 
           <IconContext.Provider value={{ color: "#1bc47d", size: 22 }}>
@@ -44,8 +54,11 @@ class SomeComponent extends Component {
           
           <p className={pathname === '/dashboard' ? "active-text" : "inactive-text"}>Dashboard</p>
         {/* </button> */}
-        </Link>
-        <Link to="/admins" className={pathname === '/admins' ? "route active-route" : "route inactive-route"}>
+        </button>
+        <button 
+        onClick={this.press.bind(this, '/admins')} 
+        //to="/admins" 
+        className={pathname === '/admins' ? "route active-route" : "route inactive-route"}>
         
         {pathname === '/admins' ? <IconContext.Provider value={{ color: "#1bc47d", size: 22 }}>
             <FaUsersCog />
@@ -53,28 +66,37 @@ class SomeComponent extends Component {
             <FaUsersCog />
           </IconContext.Provider>}
           <p className={pathname === '/admins' ? "active-text" : "inactive-text"}>Admins</p>
-        </Link>
-        <Link to="/orders" className={pathname === '/orders' ? "route active-route" : "route inactive-route"}>
+        </button>
+        <button 
+        onClick={this.press.bind(this, '/orders')} 
+     //   to="/orders"
+         className={pathname === '/orders' ? "route active-route" : "route inactive-route"}>
         {pathname === '/orders' ?           <IconContext.Provider value={{ color: "#1bc47d", size: 22 }}>
             <FaListAlt />
           </IconContext.Provider> :           <IconContext.Provider value={{ color: "#757575", size: 22 }}>
             <FaListAlt />
           </IconContext.Provider>}
           <p className={pathname === '/orders' ? "active-text" : "inactive-text"}>Orders</p>
-        </Link>
-        <Link to="/users" className={pathname === '/users' ? "route active-route" : "route inactive-route"}>
+        </button>
+        <button 
+        onClick={this.press.bind(this, '/users')} 
+        className={pathname === '/users' ? "route active-route" : "route inactive-route"}>
         {pathname === '/users' ?           <IconContext.Provider value={{ color: "#1bc47d", size: 22 }}>
             <FaUsers />
-          </IconContext.Provider> :           <IconContext.Provider value={{ color: "#757575", size: 22 }}>
+          </IconContext.Provider> :           <IconContext.Provider value={{ color: "#757575", size: 22, marginRight:10 }}>
             <FaUsers />
           </IconContext.Provider>}
           <p className={pathname === '/users' ? "active-text" : "inactive-text"}>Users</p>
-        </Link>
-        <button className="route inactive-route">
-          <IconContext.Provider value={{ color: "#757575", size: 22 }}>
-            <FaMapMarkerAlt />
-          </IconContext.Provider>
-          <p className="inactive-text">Dropboxes</p>
+        </button>
+        <button 
+        onClick={this.press.bind(this, '/dropbox')} 
+        className={pathname === '/dropbox' ? "route active-route" : "route inactive-route"}>
+        {pathname === '/dropbox' ?           <IconContext.Provider value={{ color: "#1bc47d", size: 22 }}>
+        <FaMapMarkerAlt />
+          </IconContext.Provider> :           <IconContext.Provider value={{ color: "#757575", size: 22 }}>
+          <FaMapMarkerAlt />
+          </IconContext.Provider>}
+          <p className={pathname === '/dropbox' ? "active-text" : "inactive-text"}>Dropboxes</p>
         </button>
       </div>
     );

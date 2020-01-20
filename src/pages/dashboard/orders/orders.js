@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./styles/orders.css";
 import Calendar from "react-calendar";
 import Chart from "chart.js";
 import { IconContext } from "react-icons";
 import { MdSettings, MdDeleteForever, MdEdit } from "react-icons/md";
+import { FaMoneyCheckAlt, FaUserAlt } from "react-icons/fa";
 import DatePicker from 'react-date-picker';
 import { API_URL } from "../../../root.js";
 import axios from "axios";
@@ -33,7 +34,9 @@ class Orders extends Component {
       stage: '',
       preferences: '',
       price: '',
-      description: '', orderId: ''
+      description: '', orderId: '',
+      type: '',
+      locker_id: ''
     };
   }
 
@@ -43,8 +46,9 @@ class Orders extends Component {
     this.setState({ showHideSidenav: css });
   }
 
-  showEditModal(id, preferences,stage, orderId){
-    this.setState({edit: true, id_to_edit: id, preferences, stage, orderId})
+  showEditModal(id, type, orderId){
+      this.setState({type});    
+    this.setState({edit: true, id_to_edit: id, type, orderId})
   }
 
   hideEditModal(){
@@ -53,12 +57,19 @@ class Orders extends Component {
   editOrder(e){
     e.preventDefault()
     this.setState({ error_div: false });
-    var bodyParameters = {
-      stage: this.state.stage,
+    if(this.state.type == 'charge'){
+      var bodyParameters = {
+        orderId: this.state.id_to_edit,
+        price: Number(this.state.price),
+        description: this.state.description,
+      };
+    }else{
+          var bodyParameters = {
       orderId: this.state.id_to_edit,
-      price: Number(this.state.price),
-      description: this.state.description,
+      locker_id: this.state.locker_id,
     };
+    }
+
     console.log(bodyParameters);
     var config = {
       headers: { Authorization: "Bearer " + this.props.token },
@@ -205,14 +216,26 @@ createOrder(e){
                   <MdDeleteForever />
                 </IconContext.Provider>{" "}
               </a>
-              <a
+              {item.stage == 'pending' &&              
+               <a
                 href="#"
-                onClick={this.showEditModal.bind(this, item._id, item.preferences, item.stage, item.order_id)}
+                alt='Generate Locker ID'
+                onClick={this.showEditModal.bind(this, item._id, 'locker', item.order_id)}
                 ref="btn"
               >
               <IconContext.Provider value={{ color: "#B1ADAD", size: 22 }}>
-                <MdEdit />
-              </IconContext.Provider></a>
+                <FaUserAlt />
+              </IconContext.Provider></a>}
+
+              {item.pickup && item.stage == 'active' &&               <a
+                href="#"
+                onClick={this.showEditModal.bind(this, item._id, 'charge', item.order_id)}
+                ref="btn"
+              >
+              <IconContext.Provider value={{ color: "#B1ADAD", size: 22 }}>
+                <FaMoneyCheckAlt />
+              </IconContext.Provider></a>  }
+
             </td>
           </tr>
         );
@@ -333,20 +356,21 @@ data={
           )}
           <form onSubmit={this.editOrder.bind(this)}>
             <div className="form-box">
-            <p className="label-text">Stage</p>
+            {/* <p className="label-text">Stage</p>
               <input
                   type="text"
                   value={this.state.stage}
                   onChange={event =>
                     this.setState({ stage: event.target.value })
                   }
-                />
+                /> */}
               {/* <div className="input-row"> */}
 
-       <p className="label-text">Preferences:</p>
-       <p className="label-text">{this.state.preferences?this.state.preferences:"No Preferences set"}</p>
+       {/* <p className="label-text">Preferences:</p>
+       <p className="label-text">{this.state.preferences?this.state.preferences:"No Preferences set"}</p> */}
               {/* </div> */}
               {/* <div className="input-row"> */}
+              {this.state.type == 'charge' &&                <Fragment>
                 <p className="label-text">Price</p>
                 <input
                   type="text"
@@ -354,7 +378,28 @@ data={
                   onChange={event =>
                     this.setState({ price: event.target.value })
                   }
+                />             
+                 <p className="label-text">Description(Breakdown of how the pricing was calculated)</p>
+                <textarea
+                  type="text"
+                  value={this.state.description}
+                  required
+                  onChange={event =>
+                    this.setState({ description: event.target.value })
+                  }
                 />
+                </Fragment>    }
+                {this.state.type == 'locker' &&                <Fragment>
+                <p className="label-text">Locker ID</p>
+                <input
+                  type="text"
+                  value={this.state.locker_id}
+                  onChange={event =>
+                    this.setState({ locker_id: event.target.value })
+                  }
+                />           
+                </Fragment>    }
+
                 {/* <p className="label-text">Description(Breakdown of how the pricing was calculated)</p>
                 <input
                   type="multiline"
@@ -365,15 +410,7 @@ data={
                   }
                 /> */}
               {/* </div> */}
-              <p className="label-text">Description(Breakdown of how the pricing was calculated)</p>
-                <textarea
-                  type="text"
-                  value={this.state.description}
-                  required
-                  onChange={event =>
-                    this.setState({ description: event.target.value })
-                  }
-                />
+
             <div className="input-row">
               {/* <button onClick={this.createAdmin.bind(this)}>Create</button>{" "} */}
               <input type="submit" value="Edit" className="button" />

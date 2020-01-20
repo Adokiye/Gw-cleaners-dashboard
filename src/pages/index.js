@@ -48,7 +48,7 @@ class FirstPage extends Component {
       }, []);
       return (
         <div
-          className={`col-xs-3 col-md-3 sub-divs ${isVisible ? 'is-visible' : ''}`}
+          className={`col-md-3 sub-divs ${isVisible ? 'is-visible' : ''}`}
           ref={domRef}
         >
           {props.children}
@@ -57,8 +57,8 @@ class FirstPage extends Component {
     }
     return (
       <div className="parent">
-      <div className="header">
-        <div className="left-div">
+      <div className="row header">
+        <div className="row left-div">
           <img onClick={this.home.bind(this)} src={require('../images/logo.png')} className="logo" />
           <button onClick={this.about_.bind(this)}  className="nav-text">About</button>
           <button onClick={this.home.bind(this)}  className="nav-text">Price</button>
@@ -67,21 +67,20 @@ class FirstPage extends Component {
         </div>
         <div className="header-button">Sign Up</div>
       </div>
-      <div className="middle-div">
+      <div className="row middle-div">
       {this.state.map?
       <img src={require('../images/dropboxmap.png')} 
         className="map"
       />
       :       <Fragment>
-        <div className="col-xs-12 col-md-5">
-          <p className="easy-text">Easy Laundry And Drycleaning Solutions</p>
+        <div className="col-md-5">
+          <p className="row easy-text">Easy Laundry And Drycleaning Solutions</p>
           <div className="row">
             <img className="appleImage" src={require('../images/playstore.png')} />
             <img className="appleImage playstoreImage" src={require('../images/googlePlay.png')} />
           </div>
         </div>
-        <div class="w-100"></div>
-        <div className="col-xs-12 col-md-7 row justify-content-end">
+        <div className="col-md-7">
         <img className="back-white" src={require('../images/whiteBack.png')} />
         <img className="phone" src={require('../images/phoneAsset.png')} />
         </div></Fragment>
@@ -91,12 +90,10 @@ class FirstPage extends Component {
       : 
       <Fragment>
       <div className="row justify-content-space-between white-div">
-      <div className="w-100"></div>
-        <div className="col xs-12 col-md-12 align-items-center justify-content-center under-div-text">
+        <div className="col-md-12 align-items-center justify-content-center under-div-text">
         Why You Should Use us
         </div>
-        <div class="w-100"></div>
-        <div className="col xs-12 col-md-12 align-items-center justify-content-center offer-div-text">
+        <div className="col-md-12 align-items-center justify-content-center offer-div-text">
         We offer
         </div>
         <FadeInSection>
@@ -207,8 +204,7 @@ class FirstPage extends Component {
       <div className="col-md-12 price-list-text">
       PriceList
       </div>
-      <div className="w-100" />
-      <div className="row-between">
+      <div className="row justify-content-space-between">
          <img src={require('../images/firstpricelist.png')}
           className="col-md-4"
           height={518}
@@ -227,7 +223,7 @@ class FirstPage extends Component {
       </Fragment>
       }
       
-      <div className="footer-div">
+      <div className="row footer-div">
        <div className="col-md-3 normal-text">
        Operational Office: No 10, BlaBla Close Lagos<br/>
 +234(0) 123 4567<br/> 
