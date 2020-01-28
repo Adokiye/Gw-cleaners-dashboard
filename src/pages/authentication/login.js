@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./styles/login.css";
 import Cookies from "js-cookie";
 import { API_URL } from "../../root.js";
+import { askForPermissioToReceiveNotifications } from '../../push-notification';
 import axios from "axios";
 
 class Login extends Component {
@@ -12,10 +13,14 @@ class Login extends Component {
       email: "",
       password: "",
       error: "",
-      error_div: false
+      error_div: false,
+      fcmToken:''
     };
   }
-  log() {
+  async componentDidMount(){
+
+  }
+  async log() {
     //    console.log("djdjd")
     const { state = {} } = this.props.location;
     const { prevLocation } = state;
@@ -29,9 +34,13 @@ class Login extends Component {
       });
     } else {
       this.setState({ error_div: false });
+      let token = await askForPermissioToReceiveNotifications();
+      console.log(token)
+      this.setState({fcmToken: token})
       var bodyParameters = {
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        device_token: token
       };
       axios
         .post(API_URL + "login_admin", bodyParameters, {
@@ -48,14 +57,9 @@ class Login extends Component {
           // this.props.setToken(token);
           // this.props.setId(id);
           //      Toast.show('Sign in successful');
+          
           this.props.setLog();
-          if (prevLocation !== "/") {
             this.props.history.push("/dashboard");
-          } else {
-            this.props.history.push("/dashboard");
-          }
-
-          //           this.props.navigation.navigate("Dashboard", {});
         })
         .catch(error => {
           console.log(error);

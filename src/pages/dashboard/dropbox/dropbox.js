@@ -119,9 +119,9 @@ class Dropbox extends Component {
         })
         .catch(error => {
           console.log(error);
-          if (error.response.data) {
+          if (error.message) {
             this.setState({
-              error: error.response.data.message,
+              error: error.message,
               error_div: true
             });
             console.log(JSON.stringify(error));

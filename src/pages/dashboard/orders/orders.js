@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import Chart from "chart.js";
 import { IconContext } from "react-icons";
 import { MdSettings, MdDeleteForever, MdEdit } from "react-icons/md";
-import { FaMoneyCheckAlt, FaUserAlt } from "react-icons/fa";
+import { FaMoneyCheckAlt, FaUserAlt, FaLock } from "react-icons/fa";
 import DatePicker from 'react-date-picker';
 import { API_URL } from "../../../root.js";
 import axios from "axios";
@@ -59,13 +59,13 @@ class Orders extends Component {
     this.setState({ error_div: false });
     if(this.state.type == 'charge'){
       var bodyParameters = {
-        orderId: this.state.id_to_edit,
+        order_id: this.state.id_to_edit,
         price: Number(this.state.price),
-        description: this.state.description,
+   //     description: this.state.description,
       };
     }else{
           var bodyParameters = {
-      orderId: this.state.id_to_edit,
+      order_id: this.state.id_to_edit,
       locker_id: this.state.locker_id,
     };
     }
@@ -79,7 +79,7 @@ class Orders extends Component {
       .post(API_URL + "orders/adminCharge", bodyParameters, config)
       .then(response => {
         console.log(response);
-   //     window.location.reload();
+        window.location.reload();
       })
       .catch(error => {
         console.log(error);
@@ -216,7 +216,7 @@ createOrder(e){
                   <MdDeleteForever />
                 </IconContext.Provider>{" "}
               </a>
-              {item.stage == 'pending' &&              
+              {item.stage == 'pending' && !item.pickup &&!item.locker_id &&              
                <a
                 href="#"
                 alt='Generate Locker ID'
@@ -224,10 +224,11 @@ createOrder(e){
                 ref="btn"
               >
               <IconContext.Provider value={{ color: "#B1ADAD", size: 22 }}>
-                <FaUserAlt />
+                <FaLock />
               </IconContext.Provider></a>}
 
-              {item.pickup && item.stage == 'active' &&               <a
+              {item.pickup && item.stage == 'pending' &&               
+              <a
                 href="#"
                 onClick={this.showEditModal.bind(this, item._id, 'charge', item.order_id)}
                 ref="btn"
@@ -379,7 +380,7 @@ data={
                     this.setState({ price: event.target.value })
                   }
                 />             
-                 <p className="label-text">Description(Breakdown of how the pricing was calculated)</p>
+                 {/* <p className="label-text">Description(Breakdown of how the pricing was calculated)</p>
                 <textarea
                   type="text"
                   value={this.state.description}
@@ -387,7 +388,7 @@ data={
                   onChange={event =>
                     this.setState({ description: event.target.value })
                   }
-                />
+                /> */}
                 </Fragment>    }
                 {this.state.type == 'locker' &&                <Fragment>
                 <p className="label-text">Locker ID</p>
@@ -520,7 +521,7 @@ data={
             </div>
           </form>
         </div>
-        <table id="customers">
+        <div><table id="customers">
           <tbody>
             <tr>
               <th>Order Id</th>
@@ -535,7 +536,8 @@ data={
             </tr>
             {orders_data}
           </tbody>
-        </table>
+        </table></div>
+        
       </div>
     );
   }
