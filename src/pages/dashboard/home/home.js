@@ -4,10 +4,12 @@ import Calendar from 'react-calendar';
 import Chart from "chart.js";
 import { API_URL } from '../../../root.js'
 import axios from "axios";
-import { IconContext } from "react-icons";
+import { IconContext } from "react-icons";import Cookies from 'js-cookie'
 import { MdViewQuilt } from "react-icons/md";
 import { FaUsersCog, FaListAlt, FaUsers, FaMapMarkerAlt } from "react-icons/fa";
 var moment = require('moment');
+
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -40,8 +42,11 @@ class Home extends Component {
 
   getApiData(){
     console.log(this.props.token)
+    let token = Cookies.get('token') // => 'value'
+let id = Cookies.get('id') // => 'value'
+let role = Cookies.get('role')
     var config = {
-        headers: {'Authorization': "Bearer " + this.props.token},
+        headers: {'Authorization': "Bearer " + token},
         timeout: 20000
     };
     axios

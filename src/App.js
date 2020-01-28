@@ -11,6 +11,7 @@ import Orders from './pages/dashboard/orders/orders.js';
 import Users from './pages/dashboard/users/users.js';
 import Admins from './pages/dashboard/admins/admins.js'
 import Dropbox from './pages/dashboard/dropbox/dropbox'
+import { messaging } from './push-notification';
 let token = Cookies.get('token') // => 'value'
 let id = Cookies.get('id') // => 'value'
 let role = Cookies.get('role')
@@ -59,7 +60,7 @@ class App extends Component {
 
 
     setLog(){
-        this.setState({loggedIn:true})
+        this.setState({loggedIn:true, })
     }
 
     render() {
