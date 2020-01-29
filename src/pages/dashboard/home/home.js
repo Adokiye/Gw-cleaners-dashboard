@@ -42,6 +42,9 @@ class Home extends Component {
 
   getApiData(){
     console.log(this.props.token)
+    if(!this.props.token){
+      window.location.reload();
+    }
     let token = Cookies.get('token') // => 'value'
 let id = Cookies.get('id') // => 'value'
 let role = Cookies.get('role')
