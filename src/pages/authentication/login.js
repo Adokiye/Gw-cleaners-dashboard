@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./styles/login.css";
 import Cookies from "js-cookie";
 import { API_URL } from "../../root.js";
-import { askForPermissioToReceiveNotifications } from '../../push-notification';
+///import { askForPermissioToReceiveNotifications } from '../../push-notification';
 import axios from "axios";
 
 class Login extends Component {
@@ -34,13 +34,13 @@ class Login extends Component {
       });
     } else {
       this.setState({ error_div: false });
-      let token = await askForPermissioToReceiveNotifications();
-      console.log(token)
-      this.setState({fcmToken: token})
+    //  let token = await askForPermissioToReceiveNotifications();
+  //    console.log(token)
+   //   this.setState({fcmToken: token})
       var bodyParameters = {
         email: this.state.email,
         password: this.state.password,
-        device_token: token
+    //    device_token: token
       };
       axios
         .post(API_URL + "login_admin", bodyParameters, {
