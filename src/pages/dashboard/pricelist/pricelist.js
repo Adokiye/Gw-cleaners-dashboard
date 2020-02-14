@@ -103,8 +103,10 @@ class Pricelist extends Component {
         headers: { Authorization: "Bearer " + this.props.token },
         timeout: 20000
       };
-    if (!this.state.address) {
-      this.setState({ error: "Address field is required", error_div: true });
+      if (!this.state.name) {
+        this.setState({ error: "Name field is required", error_div: true });
+      }else if (!this.state.price) {
+      this.setState({ error: "Price field is required", error_div: true });
     } else {
       this.setState({ error_div: false });
       var bodyParameters = {
@@ -112,7 +114,7 @@ class Pricelist extends Component {
       };
       console.log(bodyParameters);
       axios
-        .post(API_URL + "dropbox", bodyParameters, config,)
+        .post(API_URL + "pricelist", bodyParameters, config,)
         .then(response => {
           console.log(response);
           window.location.reload();
