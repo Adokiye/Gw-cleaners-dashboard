@@ -65,7 +65,7 @@ class FirstPage extends Component {
        <button onClick={this.home.bind(this)}  className="nav-text">Contact</button>
          <button onClick={this.map.bind(this)}  className="nav-text">Dropbox Map</button>
         </div>
-        <div className="header-button">Sign Up</div>
+        {/* <div className="header-button">Sign Up</div> */}
       </div>
       <div className="row middle-div">
       {this.state.map?
@@ -73,7 +73,7 @@ class FirstPage extends Component {
         className="map"
       />
       :       <Fragment>
-        <div className="col-md-5">
+        <div className="col-md-5" style="padding-left: 30px;">
           <p className="row easy-text">Easy Laundry And Drycleaning Solutions</p>
           <div className="row">
             <img className="appleImage" src={require('../images/playstore.png')} />
