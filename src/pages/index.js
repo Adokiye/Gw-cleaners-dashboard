@@ -253,8 +253,8 @@ e.stopPropagation();
       </Fragment>
       }
       
-      <div id="contact" className="row footer-div">
-       <div className="col-md-3 normal-text">
+      <div  className="row footer-div">
+       <div className="col-md-3 normal-text" id="contact">
        Operational Office: No 10, BlaBla Close Lagos<br/>
 +234(0) 123 4567<br/> 
 Mon - Fri (9am - 5pm)<br/> 
