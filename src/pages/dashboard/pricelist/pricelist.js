@@ -111,7 +111,8 @@ class Pricelist extends Component {
     } else {
       this.setState({ error_div: false });
       var bodyParameters = {
-        address: this.state.address,
+        name: this.state.name,
+        price: this.state.price
       };
       console.log(bodyParameters);
       axios
