@@ -29,29 +29,35 @@ class FirstPage extends Component {
   }
 
   price(e){
-    this.setState({home: true, map: false})
-        window.location.href="#price";
+    this.setState({home: true, map: false}, ()=> {
+      window.location.href="#price";
 
-    e.preventDefault();
-    e.stopPropagation(); 
+e.preventDefault();
+e.stopPropagation(); 
+//  this.scrollToMyRef()
+})
   }
 
   contact(e){
 
-    this.setState({home: true, map: false})
-    window.location.href="#contact";
+    this.setState({home: true, map: false}, ()=> {
+      window.location.href="#contact";
 
-    e.preventDefault();
-    e.stopPropagation(); 
+e.preventDefault();
+e.stopPropagation(); 
+//  this.scrollToMyRef()
+})
     }
 
   about_(e){
-    this.setState({home: true, map: false})
-    window.location.href="#about";
+    this.setState({home: true, map: false}, ()=> {
+          window.location.href="#about";
 
     e.preventDefault();
     e.stopPropagation(); 
   //  this.scrollToMyRef()
+    })
+
   }
 
   map(){
