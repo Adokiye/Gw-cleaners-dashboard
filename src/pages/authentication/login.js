@@ -46,12 +46,12 @@ class Login extends Component {
         .post(API_URL + "login_admin", bodyParameters, {
           timeout: 20000
         })
-        .then(response => {
+        .then(async response => {
           console.log(response);
           let id = response.data.data._id;
           let token = response.data.token;
           let role = response.data.role;
-          Cookies.set("token", token, { expires: 14 });
+          await Cookies.set("token", token, { expires: 14 });
           Cookies.set("id", id, { expires: 14 });
           Cookies.set("role", role, { expires: 14 });
           // this.props.setToken(token);
