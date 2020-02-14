@@ -3,6 +3,7 @@ import "./styles/sidebar.css";
 import { IconContext } from "react-icons";
 import { MdViewQuilt } from "react-icons/md";
 import { FaUsersCog, FaListAlt, FaUsers, FaMapMarkerAlt } from "react-icons/fa";
+import { IoIosPricetags } from "react-icons/io";
 import { Link, withRouter } from 'react-router-dom';
 
 
@@ -97,6 +98,16 @@ if(value != pathname){
           <FaMapMarkerAlt />
           </IconContext.Provider>}
           <p className={pathname === '/dropbox' ? "active-text" : "inactive-text"}>Dropboxes</p>
+        </button>
+        <button 
+        onClick={this.press.bind(this, '/pricelist')} 
+        className={pathname === '/pricelist' ? "route active-route" : "route inactive-route"}>
+        {pathname === '/pricelist' ?           <IconContext.Provider value={{ color: "#1bc47d", size: 22 }}>
+        <IoIosPricetags />
+          </IconContext.Provider> :           <IconContext.Provider value={{ color: "#757575", size: 22 }}>
+          <IoIosPricetags />
+          </IconContext.Provider>}
+          <p className={pathname === '/pricelist' ? "active-text" : "inactive-text"}>Pricelist</p>
         </button>
       </div>
     );
