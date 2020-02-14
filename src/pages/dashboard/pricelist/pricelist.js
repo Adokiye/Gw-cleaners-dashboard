@@ -132,13 +132,13 @@ class Pricelist extends Component {
 
   render() {
     let { showHideSidenav, showCreate } = this.state;
-    const dropbox_data = this.state.dropbox.map(
+    const pricelist_data = this.state.pricelist.map(
       function(item, index) {
         return (
           <tr>
             <td>{index + 1}</td>
-            <td>{item.dropbox_id}</td>
-            <td>{item.address}</td>
+            <td>{item.name}</td>
+            <td>{item.price}</td>
             <td>
               <a
                 href="#"
@@ -201,16 +201,23 @@ class Pricelist extends Component {
           <form onSubmit={this.createPricelist.bind(this)}>
             {/* <div className="form-box">
             </div> */}
-            <p className="label-text">Address</p>
+            <p className="label-text">Name</p>
             <input
               type="text"
-              value={this.state.address}
+              value={this.state.name}
               required
-              onChange={event => this.setState({ address: event.target.value })}
+              onChange={event => this.setState({ name: event.target.value })}
+            />
+                        <p className="label-text">Price</p>
+            <input
+              type="text"
+              value={this.state.price}
+              required
+              onChange={event => this.setState({ price: event.target.value })}
             />
             <div className="input-row">
               {/* <button onClick={this.createAdmin.bind(this)}>Create</button>{" "} */}
-              <input type="submit" value="Create" className="button" />
+              <input type="submit" value="Add" className="button" />
               <div
                 className="button"
                 onClick={this.handleCloseCreate.bind(this)}
@@ -228,7 +235,7 @@ class Pricelist extends Component {
               <th>Price</th>
               <th>Actions</th>
             </tr>
-            {dropbox_data}
+            {pricelist_data}
           </tbody>
         </table>
       </div>
