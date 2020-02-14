@@ -73,7 +73,7 @@ class FirstPage extends Component {
         className="map"
       />
       :       <Fragment>
-        <div className="col-md-5" style="padding-left: 30px;">
+        <div className="col-md-5" style={{paddingLeft: 30}}>
           <p className="row easy-text">Easy Laundry And Drycleaning Solutions</p>
           <div className="row">
             <img className="appleImage" src={require('../images/playstore.png')} />
