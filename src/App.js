@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import { Switch, Route, Link, Redirect, BrowserRouter, withRouter } from "react-router-dom";
 import Sidebar from './components/sidebar/sidebar.js';
 import Home from './pages/dashboard/home/home.js'
+import Pricelist from './pages/dashboard/pricelist/pricelist.js'
 import FirstPage from './pages/index'
 import Orders from './pages/dashboard/orders/orders.js';
 import Users from './pages/dashboard/users/users.js';
@@ -77,6 +78,7 @@ class App extends Component {
             <ProtectedRoute path="/users" loggedIn={token && true} component={Users} />
             <ProtectedRoute path="/admins" loggedIn={token && true} component={Admins} />
             <ProtectedRoute path="/dropbox" loggedIn={token && true} component={Dropbox} />
+            <ProtectedRoute path="/pricelist" loggedIn={token && true} component={Pricelist} />
           </Switch></BrowserRouter>
 {/* <Sidebar />
 <Admins /> */}
