@@ -65,7 +65,7 @@ class Login extends Component {
           console.log(error);
           //       Toast.show(JSON.stringify(error.message),)
           this.setState({
-            error: JSON.stringify(error.message),
+            error: error.message,
             error_div: true
           });
           //             this.setState({ regLoader: false });
