@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./styles/dropbox.css";
+import "./styles/pricelist.css";
 import { IconContext } from "react-icons";
 import { MdSettings, MdDeleteForever } from "react-icons/md";
 import { FaMoneyCheckAlt, FaUserAlt } from "react-icons/fa";
@@ -13,13 +13,14 @@ class Pricelist extends Component {
     this.state = {
       showHideSidenav: "hidden",
       show: false,
-      dropbox: [],
+      pricelist: [],
       toDelete: "",
       showCreate: false,
       number: "",
       first_name: "",
       last_name: "",
-      address: "",
+      price: "",
+      name: '',
       zip: "",
       email: "",
       password: "",
@@ -59,18 +60,18 @@ class Pricelist extends Component {
       timeout: 20000
     };
     axios
-      .get(API_URL + "dropbox", config)
+      .get(API_URL + "pricelist", config)
       .then(response => {
         console.log(response);
         if (response.data.message == "Token is not valid") {
           this.props.history.push("/login");
         }
         var len = response.data.length;
-        this.setState({ dropbox: [] });
+        this.setState({ pricelist: [] });
         for (let i = 0; i < len; i++) {
           let row = response.data[i];
           this.setState(prevState => ({
-            dropbox: [...prevState.dropbox, row]
+            pricelist: [...prevState.pricelist, row]
           }));
         }
       })
@@ -87,7 +88,7 @@ class Pricelist extends Component {
       timeout: 20000
     };
     axios
-      .delete(API_URL + "dropbox/" + this.state.toDelete, config)
+      .delete(API_URL + "pricelist/" + this.state.toDelete, config)
       .then(response => {
         console.log(response);
         window.location.reload();
