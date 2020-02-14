@@ -28,9 +28,29 @@ class FirstPage extends Component {
     this.setState({home: true, map: false})
   }
 
-  about_(e){
-    e.preventDefault();
+  price(e){
     this.setState({home: true, map: false})
+        window.location.href="#price";
+
+    e.preventDefault();
+    e.stopPropagation(); 
+  }
+
+  contact(e){
+
+    this.setState({home: true, map: false})
+    window.location.href="#contact";
+
+    e.preventDefault();
+    e.stopPropagation(); 
+    }
+
+  about_(e){
+    this.setState({home: true, map: false})
+    window.location.href="#about";
+
+    e.preventDefault();
+    e.stopPropagation(); 
   //  this.scrollToMyRef()
   }
 
@@ -65,8 +85,8 @@ class FirstPage extends Component {
         <div className="row left-div">
           <img onClick={this.home.bind(this)} src={require('../images/logo.png')} className="logo" />
           <button onClick={this.about_.bind(this)}  className="nav-text">About</button>
-          <button onClick={this.home.bind(this)}  className="nav-text">Price</button>
-       <button onClick={this.home.bind(this)}  className="nav-text">Contact</button>
+          <button onClick={this.price.bind(this)}  className="nav-text">Price</button>
+       <button onClick={this.contact.bind(this)}  className="nav-text">Contact</button>
          <button onClick={this.map.bind(this)}  className="nav-text">Dropbox Map</button>
         </div>
         {/* <div className="header-button">Sign Up</div> */}
@@ -93,7 +113,7 @@ class FirstPage extends Component {
       {this.state.map ? null
       : 
       <Fragment>
-      <div className="row justify-content-space-between white-div">
+      <div id="about" className="row justify-content-space-between white-div">
         <div className="col-md-12 align-items-center justify-content-center under-div-text">
         Why You Should Use us
         </div>
@@ -205,7 +225,7 @@ class FirstPage extends Component {
       </div>
       <img src={require('../images/downCurve.png')} className="about-us-under-div" />
       <div className="row justify-content-space-between price-list-div">
-      <div className="col-md-12 price-list-text">
+      <div id="pricelist" className="col-md-12 price-list-text">
       PriceList
       </div>
       <div className="row justify-content-space-between">
@@ -227,7 +247,7 @@ class FirstPage extends Component {
       </Fragment>
       }
       
-      <div className="row footer-div">
+      <div id="contact" className="row footer-div">
        <div className="col-md-3 normal-text">
        Operational Office: No 10, BlaBla Close Lagos<br/>
 +234(0) 123 4567<br/> 
