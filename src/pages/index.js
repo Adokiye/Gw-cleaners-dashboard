@@ -11,8 +11,11 @@ var moment = require('moment');
 class FirstPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-        map: false, home: true};
+    this.state = 
+    { 
+        map: false, 
+        home: true
+      };
         this.about = React.createRef() 
   }
 
@@ -20,12 +23,13 @@ class FirstPage extends Component {
   componentDidMount() {
   }
 
-  home(){
-    
+  home(e){
+    e.preventDefault();
     this.setState({home: true, map: false})
   }
 
-  about_(){
+  about_(e){
+    e.preventDefault();
     this.setState({home: true, map: false})
   //  this.scrollToMyRef()
   }
@@ -73,7 +77,7 @@ class FirstPage extends Component {
         className="map"
       />
       :       <Fragment>
-        <div className="col-md-5" style={{paddingLeft: 30}}>
+        <div className="col-md-5" style={{paddingLeft: 50}}>
           <p className="row easy-text">Easy Laundry And Drycleaning Solutions</p>
           <div className="row">
             <img className="appleImage" src={require('../images/playstore.png')} />
