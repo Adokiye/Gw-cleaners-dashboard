@@ -184,17 +184,17 @@ class Pricelist extends Component {
           handleClose={this.handleClose.bind(this)}
           delete={this.delete.bind(this)}
         >
-          <p>Are you sure you want to delete this dropbox</p>
+          <p>Are you sure you want to delete this item</p>
         </ModalAdmin>
         <p className="admin-header">Pricelist</p>
         <button
           className="admin-button"
           onClick={this.handleShowCreate.bind(this)}
         >
-          <p>ADD DBOX</p>
+          <p>ADD ITEM</p>
         </button>
         <div className={showHideClassNameCreate}>
-          <p className="admin-header">Add dropbox</p>
+          <p className="admin-header">Add Item</p>
           {this.state.error_div && (
             <div className="error">{this.state.error}</div>
           )}
@@ -224,8 +224,8 @@ class Pricelist extends Component {
           <tbody>
             <tr>
               <th>S/N</th>
-              <th>Pricelist ID</th>
-              <th>Pricelist Address</th>
+              <th>Name</th>
+              <th>Price</th>
               <th>Actions</th>
             </tr>
             {dropbox_data}
