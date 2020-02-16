@@ -4,7 +4,8 @@ import Calendar from 'react-calendar';
 import Chart from "chart.js";
 import { API_URL } from '../../../root.js'
 import axios from "axios";
-import { IconContext } from "react-icons";import Cookies from 'js-cookie'
+import { IconContext } from "react-icons";
+import Cookies from 'js-cookie'
 import { MdViewQuilt } from "react-icons/md";
 import { FaUsersCog, FaListAlt, FaUsers, FaMapMarkerAlt } from "react-icons/fa";
 var moment = require('moment');
@@ -40,23 +41,23 @@ class Home extends Component {
       this.getApiData();
   }
 
-  getApiData(){
-    console.log(this.props.token)
-    if(!this.props.token){
-      window.location.reload();
-    }
-    let token = Cookies.get('token') // => 'value'
+  async getApiData(){
+    // console.log(this.props.token)
+    // if(!this.props.token){
+    //   window.location.reload();
+    // }
+    let token = await Cookies.get('token') // => 'value'
 let id = Cookies.get('id') // => 'value'
 let role = Cookies.get('role')
     var config = {
         headers: {'Authorization': "Bearer " + token},
         timeout: 20000
     };
-    axios
+    await axios
     .get(
       API_URL+"orders", config
     )
-    .then(response => {
+    .then(async response => {
       console.log(response);
       if (response.data && response.data.length > 0) {
         console.log("response.data");
@@ -73,13 +74,13 @@ let role = Cookies.get('role')
               }));
           }
     }
-      axios.get(API_URL+"users/" + this.props.id, config).then(response => {
+      axios.get(API_URL+"users/" + this.props.id, config).then(async response => {
         console.log(response);
         if(response.data.message == 'Token is not valid'){
             this.props.history.push("/");
         }
         this.setState({first_name: response.data.first_name})
-        axios.get(API_URL+"users" , config).then(response => {
+        await axios.get(API_URL+"users" , config).then(response => {
             console.log(response);
             if(response.data.message == 'Token is not valid'){
                 this.props.history.push("/");

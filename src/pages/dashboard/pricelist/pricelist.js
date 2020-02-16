@@ -5,8 +5,9 @@ import { MdSettings, MdDeleteForever } from "react-icons/md";
 import { FaMoneyCheckAlt, FaUserAlt } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import { API_URL } from "../../../root.js";
-import axios from "axios";
+import axios from "axios";import Cookies from 'js-cookie'
 var moment = require("moment");
+
 class Pricelist extends Component {
   constructor(props) {
     super(props);
@@ -53,10 +54,11 @@ class Pricelist extends Component {
     this.setState({ number: e.target.value });
   }
 
-  componentDidMount() {
-    console.log(this.props.token);
+  async componentDidMount() {
+  //  console.log(this.props.token);
+    let token = await Cookies.get('token') 
     var config = {
-      headers: { Authorization: "Bearer " + this.props.token },
+      headers: { Authorization: "Bearer " + token },
       timeout: 20000
     };
     axios
@@ -81,10 +83,11 @@ class Pricelist extends Component {
       });
   }
 
-  delete() {
+  async  delete() {
     console.log(this.state.toDelete);
+    let token = await Cookies.get('token') 
     var config = {
-      headers: { Authorization: "Bearer " + this.props.token },
+      headers: { Authorization: "Bearer " + token },
       timeout: 20000
     };
     axios

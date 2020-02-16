@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { API_URL } from "../../root.js";
 ///import { askForPermissioToReceiveNotifications } from '../../push-notification';
 import axios from "axios";
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 class Login extends Component {
   constructor(props) {
     super(props);

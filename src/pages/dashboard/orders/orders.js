@@ -6,6 +6,7 @@ import { IconContext } from "react-icons";
 import { MdSettings, MdDeleteForever, MdEdit } from "react-icons/md";
 import { FaMoneyCheckAlt, FaUserAlt, FaLock } from "react-icons/fa";
 import DatePicker from 'react-date-picker';
+import Cookies from 'js-cookie'
 import { API_URL } from "../../../root.js";
 import axios from "axios";
 import ReactModal from 'react-modal';
@@ -54,7 +55,7 @@ class Orders extends Component {
   hideEditModal(){
     this.setState({edit: false, })
   }
-  editOrder(e){
+  async editOrder(e){
     e.preventDefault()
     this.setState({ error_div: false });
     if(this.state.type == 'charge'){
@@ -69,10 +70,10 @@ class Orders extends Component {
       locker_id: this.state.locker_id,
     };
     }
-
+    let token = await Cookies.get('token') 
     console.log(bodyParameters);
     var config = {
-      headers: { Authorization: "Bearer " + this.props.token },
+      headers: { Authorization: "Bearer " + token },
       timeout: 20000
     };
     axios
@@ -145,10 +146,11 @@ createOrder(e){
     this.setState({ createOrder: false });
   }
 
-  delete() {
+  async delete() {
     console.log(this.state.toDelete);
+    let token = await Cookies.get('token') 
     var config = {
-      headers: { Authorization: "Bearer " + this.props.token },
+      headers: { Authorization: "Bearer " + token },
       timeout: 20000
     };
     axios
@@ -163,10 +165,11 @@ createOrder(e){
       });
   }
 
-  componentDidMount() {
-    console.log(this.props.token);
+  async componentDidMount() {
+  //  console.log(this.props.token);
+  let token = await Cookies.get('token') 
     var config = {
-      headers: { Authorization: "Bearer " + this.props.token },
+      headers: { Authorization: "Bearer " + token },
       timeout: 20000
     };
     axios

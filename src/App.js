@@ -51,8 +51,8 @@ class App extends Component {
         this.state = { apiResponse: "", loggedIn: false, token: '', id: '' };
     }
 
-    componentDidMount() {
-       let token = Cookies.get('token') // => 'value'
+    async componentDidMount() {
+       let token = await Cookies.get('token') // => 'value'
        let id = Cookies.get('id') // => 'value'
        if(token && id){
           this.setState({loggedIn: true, token: token, id: id})
@@ -73,12 +73,12 @@ class App extends Component {
             render={(props) => <Login {...props} setLog={this.setLog.bind(this)} />} />
                         <Route path="/" exact 
             render={(props) => <FirstPage {...props} />} />
-            <ProtectedRoute exact path="/dashboard" loggedIn={token && true} component={Home} />
-            <ProtectedRoute path="/orders" loggedIn={token && true} component={Orders} />
-            <ProtectedRoute path="/users" loggedIn={token && true} component={Users} />
-            <ProtectedRoute path="/admins" loggedIn={token && true} component={Admins} />
-            <ProtectedRoute path="/dropbox" loggedIn={token && true} component={Dropbox} />
-            <ProtectedRoute path="/pricelist" loggedIn={token && true} component={Pricelist} />
+            <ProtectedRoute exact path="/dashboard" loggedIn={this.state.token && true} component={Home} />
+            <ProtectedRoute path="/orders" loggedIn={this.state.token && true} component={Orders} />
+            <ProtectedRoute path="/users" loggedIn={this.state.token && true} component={Users} />
+            <ProtectedRoute path="/admins" loggedIn={this.state.token && true} component={Admins} />
+            <ProtectedRoute path="/dropbox" loggedIn={this.state.token && true} component={Dropbox} />
+            <ProtectedRoute path="/pricelist" loggedIn={this.state.token && true} component={Pricelist} />
           </Switch></BrowserRouter>
 {/* <Sidebar />
 <Admins /> */}

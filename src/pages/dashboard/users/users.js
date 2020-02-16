@@ -7,6 +7,7 @@ import { MdSettings, MdDeleteForever } from "react-icons/md";
 import Button from "react-bootstrap/Button";
 import { API_URL } from '../../../root.js';
 import axios from "axios";
+import Cookies from 'js-cookie'
 var moment = require("moment");
 class Users extends Component {
   constructor(props) {
@@ -47,10 +48,10 @@ class Users extends Component {
       });
   }
 
-  componentDidMount() {
-    console.log(this.props.token);
+  async componentDidMount() {
+    let token = await Cookies.get('token') 
     var config = {
-      headers: { Authorization: "Bearer " + this.props.token },
+      headers: { Authorization: "Bearer " + token },
       timeout: 20000
     };
     axios
