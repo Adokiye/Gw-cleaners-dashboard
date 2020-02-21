@@ -78,7 +78,7 @@ class App extends Component {
             <ProtectedRoute path="/users" loggedIn={this.state.token && true} component={Users} />
             <ProtectedRoute path="/admins" loggedIn={this.state.token && true} component={Admins} />
             <ProtectedRoute path="/dropbox" loggedIn={this.state.token && true} component={Dropbox} />
-            <ProtectedRoute path="/pricelist" loggedIn={this.state.token && true} component={Pricelist} />
+            {/* <ProtectedRoute path="/pricelist" loggedIn={this.state.token && true} component={Pricelist} /> */}
           </Switch></BrowserRouter>
 {/* <Sidebar />
 <Admins /> */}

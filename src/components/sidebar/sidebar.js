@@ -99,7 +99,7 @@ if(value != pathname){
           </IconContext.Provider>}
           <p className={pathname === '/dropbox' ? "active-text" : "inactive-text"}>Dropboxes</p>
         </button>
-        <button 
+        {/* <button 
         onClick={this.press.bind(this, '/pricelist')} 
         className={pathname === '/pricelist' ? "route active-route" : "route inactive-route"}>
         {pathname === '/pricelist' ?           <IconContext.Provider value={{ color: "#1bc47d", size: 22 }}>
@@ -108,7 +108,7 @@ if(value != pathname){
           <IoIosPricetags />
           </IconContext.Provider>}
           <p className={pathname === '/pricelist' ? "active-text" : "inactive-text"}>Pricelist</p>
-        </button>
+        </button> */}
       </div>
     );
   }
