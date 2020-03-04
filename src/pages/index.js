@@ -230,7 +230,7 @@ e.stopPropagation();
         </div>
       </div>
       <img src={require('../images/downCurve.png')} className="about-us-under-div" />
-      <div className="row justify-content-space-between price-list-div">
+      {/* <div className="row justify-content-space-between price-list-div">
       <div id="price" className="col-md-12 price-list-text">
       PriceList
       </div>
@@ -249,7 +249,7 @@ e.stopPropagation();
           height={518}
           />
       </div>
-      </div>
+      </div> */}
       </Fragment>
       }
       
